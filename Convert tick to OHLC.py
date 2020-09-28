@@ -18,7 +18,7 @@ df.drop(['day','time','day_time'],axis=1,inplace=True)
 df_resample = df.resample('20S').ohlc() # 将tick转为20s的OHLC。此操作会在index中自动填充不存在的日期，需要进一步操作将其删除
 diffs = np.setdiff1d(df_resample.index, df.index) # 两者index的区别
 df_outcome = df_resample[~np.in1d(df_resample.index, diffs)] # 在df_resmaple里删掉df中没有的index
-df_outcome.ffill() # 空缺值继承前值
+df_outcome = df_outcome.ffill() # 空缺值继承前值
 #print(df_outcome)
 
 df_outcome.to_csv('convert outcome.csv')
